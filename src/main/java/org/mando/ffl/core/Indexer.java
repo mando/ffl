@@ -19,7 +19,7 @@ public class Indexer {
 
         document.addField("id", doc.getId());
         document.addField("content_t", doc.getContent());
-        document.addField("uri_t", doc.getUri());
+        document.addField("uri_s", doc.getUri());
 
         try {
             UpdateResponse response = client.add(document);

@@ -4,7 +4,7 @@ import io.dropwizard.cli.Command;
 import io.dropwizard.setup.Bootstrap;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
-import org.mando.ffl.core.ContentExtractor;
+import org.mando.ffl.core.Extracter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class ContentExtractorCommand extends Command {
     public void run(Bootstrap<?> bootstrap, Namespace namespace) throws Exception {
         String url = namespace.getString("url");
 
-        String content = ContentExtractor.extractFromUrl(url);
+        String content = Extracter.extractFromUrl(url);
 
         System.out.println(content);
     }

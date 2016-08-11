@@ -6,7 +6,7 @@ import de.l3s.boilerpipe.extractors.ArticleExtractor;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class ContentExtractor {
+public class Extracter {
 
     public static String extractFromUrl(String url) throws Exception {
         URL sourceUrl = null;

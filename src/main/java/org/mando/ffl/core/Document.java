@@ -1,8 +1,11 @@
 package org.mando.ffl.core;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.commons.codec.digest.DigestUtils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Document {
 
     private String uri;
@@ -15,6 +18,12 @@ public class Document {
         this.id = generateId(uri);
     }
 
+    public Document(String uri) {
+        this(uri, null);
+    }
+
+    public Document() {}
+
     @JsonProperty
     public String getUri() { return uri; }
 
@@ -25,6 +34,6 @@ public class Document {
     public Object getId() { return id; }
 
     private String generateId(String uri) {
-        return DigestUtils.sha512Hex(uri);
+        return DigestUtils.sha1Hex(uri);
     }
 }

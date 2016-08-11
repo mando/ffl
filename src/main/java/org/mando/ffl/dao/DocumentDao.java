@@ -1,7 +1,7 @@
 package org.mando.ffl.dao;
 
 import de.l3s.boilerpipe.BoilerpipeProcessingException;
-import org.mando.ffl.core.ContentExtractor;
+import org.mando.ffl.core.Extracter;
 import org.mando.ffl.core.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ public class DocumentDao {
 
         String content = null;
         try {
-            content = ContentExtractor.extractFromUrl(uri);
+            content = Extracter.extractFromUrl(uri);
         } catch (MalformedURLException e) {
             logger.error("Malformed URL {}", uri);
             e.printStackTrace();

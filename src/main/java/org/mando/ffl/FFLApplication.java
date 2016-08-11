@@ -3,10 +3,13 @@ package org.mando.ffl;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
 import org.apache.solr.client.solrj.SolrClient;
 import org.mando.ffl.cli.ContentExtractorCommand;
 import org.mando.ffl.cli.DocumentIndexerCommand;
 import org.mando.ffl.resources.DocumentResource;
+
+import java.util.concurrent.ExecutorService;
 
 public class FFLApplication extends Application<FFLConfiguration> {
 
@@ -21,8 +24,11 @@ public class FFLApplication extends Application<FFLConfiguration> {
 
     public void run(FFLConfiguration config, Environment env) {
         final SolrClient solr = config.getSolr().newManagedSolrClient(env);
-        final DocumentResource docResource = new DocumentResource(solr);
+
+        ExecutorService indexer = env.lifecycle().executorService("indexer")
+            .build();
+
+        final DocumentResource docResource = new DocumentResource(solr, indexer);
         env.jersey().register(docResource);
     }
 }
-
